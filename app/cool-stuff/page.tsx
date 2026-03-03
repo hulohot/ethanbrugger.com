@@ -8,7 +8,7 @@ export const revalidate = 60;
 
 export default function CoolStuffPage() {
 	const items = allCoolStuffs
-		.filter((item) => item.published)
+		.filter((item) => item.published && item.url)
 		.sort(
 			(a, b) =>
 				new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
@@ -31,7 +31,7 @@ export default function CoolStuffPage() {
 				<div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2">
 					{items.map((item) => (
 						<Card key={item.slug}>
-							<Link href={item.url} target="_blank" rel="noopener noreferrer">
+							<Link href={item.url!} target="_blank" rel="noopener noreferrer">
 								<article className="relative w-full h-full p-4 md:p-8">
 									<div className="text-xs text-zinc-100 mb-2">
 										{item.date ? (
